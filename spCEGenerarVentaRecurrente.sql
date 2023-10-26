@@ -2465,7 +2465,7 @@ END
 		   NULL PorcRecargo,
 		   NULL ArtRecargo,
 		   NULL Frecuencia,
-           NULL Unidad,
+             NULL Unidad,
 		   NULL SubCuenta,
 		   NULL CantidadInventario,
 		   NULL Alumno,

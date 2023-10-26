@@ -10,7 +10,8 @@ DROP PROCEDURE xpFBHAplicarBecaEnferm
 GO
 CREATE PROCEDURE xpFBHAplicarBecaEnferm
 @ID		  INT,
-@VentaID	  INT
+@VentaID	  INT,
+@Renglon	FLOAT
 AS
 BEGIN
 	DECLARE @PlanEstudio		VARCHAR(25),
@@ -42,7 +43,15 @@ BEGIN
     	   FROM CEBecaCiclo AS cc
     	   WHERE cc.Ciclo=@CicloEscolar
     	   AND cc.Beca=@TipoBeca
+
+    	   UPDATE VentaD SET DescuentoLinea = @DescBeca
+    				     ,DescuentoImporte = Precio*(@DescBeca/100)
+    	   WHERE ID=@VentaID
+    	   AND Renglon=@Renglon
     	   
+    	   UPDATE Venta SET Importe = Importe-(Importe*(@DescBeca/100))
+    					,DescuentoLineal = Importe*(@DescBeca/100)
+    	   WHERE ID=@VentaID
     	   
     END
 		  
